@@ -51,7 +51,7 @@ y_train = keras.utils.to_categorical(y_train, num_classes)
 #Check GPU
 print(tf.config.list_physical_devices('GPU'))
 
-#Training with 5-fold-cross validation
+#Training with 5-fold-cross validation and data augmentation
 seed = 7
 np.random.seed(seed)
 kfold = KFold(n_splits = 5, shuffle = True, random_state = seed)
@@ -113,6 +113,7 @@ print("Sensitivity:", round(recall_score(rounded_labels, y_pred) * 100, 2))
 print("Specificity:", round(specificity_score(rounded_labels, y_pred) * 100, 2))
 print("F1 score:", round(f1_score(rounded_labels, y_pred) * 100, 2))
 print("%.2f%% (+/- %.2f%%)" % (np.mean(cvscores), np.std(cvscores)))
+
 #print the images and the respective predicted and actual labels
 i = 0
 while i < 100: 
