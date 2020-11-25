@@ -109,9 +109,9 @@ rounded_labels = np.argmax(y_train[test], axis = 1)
 print('Confusion Matrix')
 confusion = confusion_matrix(rounded_labels, y_pred)
 print(confusion)
-print("Sensitivity:", round(recall_score(rounded_labels, y_pred, average = "macro") * 100, 2))
-print("Specificity:", round(specificity_score(rounded_labels, y_pred, average = "macro") * 100, 2))
-print("F1 score:", round(f1_score(rounded_labels, y_pred, average = "macro") * 100, 2))
+print("Sensitivity:", round(recall_score(rounded_labels, y_pred) * 100, 2))
+print("Specificity:", round(specificity_score(rounded_labels, y_pred) * 100, 2))
+print("F1 score:", round(f1_score(rounded_labels, y_pred) * 100, 2))
 print("%.2f%% (+/- %.2f%%)" % (np.mean(cvscores), np.std(cvscores)))
 #print the images and the respective predicted and actual labels
 i = 0
