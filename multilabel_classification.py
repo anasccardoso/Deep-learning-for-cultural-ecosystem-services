@@ -11,7 +11,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from keras import backend as K
-from keras.applications.vgg16 import VGG16
+from keras.applications.resnet import ResNet152
 from sklearn.model_selection import KFold
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import recall_score
@@ -30,7 +30,7 @@ images_cv = [cv2.imread(i) for i in images_names if i.endswith(extension)]
 x_train = np.array(images_cv)
 
 #Importing the photo labels
-df = pd.read_excel("/content/CA_PNPG_Flickr.xlsx")
+df = pd.read_excel("/content/PG_PNPG_Flickr.xlsx")
 data = df.dropna(subset = ["Main_focus"])
 y = data["Main_focus"]
 y_train = np.array(y)
@@ -74,10 +74,10 @@ for i in x:
     x = np.append(x, batch[0], axis = 0)
     y = np.append(y, batch[1], axis = 0)
 model = Sequential()
-model.add(VGG16(include_top = False, pooling = "max", input_shape = (173, 273, 3), weights = "imagenet")) #for ResNet152, use ResNet152()
+model.add(ResNet152(include_top = False, pooling = "max", input_shape = (173, 273, 3), weights = "imagenet")) 
 model.add(Dense(128, activation = 'relu'))
 model.add(Dense(num_classes, activation = "softmax"))
-model.compile(optimizer = keras.optimizers.Adam(lr = 0.000001), loss = keras.losses.categorical_crossentropy, metrics = ['accuracy']) #for ResNet152, use lr = 0.0001
+model.compile(optimizer = keras.optimizers.Adam(lr = 0.0001), loss = keras.losses.categorical_crossentropy, metrics = ['accuracy']) 
 es = EarlyStopping(monitor='val_loss', mode = 'auto', patience = 16, verbose = 0)
 cp = ModelCheckpoint('/content/model.h5', monitor='val_loss', save_best_only = True, verbose = 0, mode = 'auto')
 history = model.fit(x, y, validation_split = 0.1, batch_size = batch_size, epochs = epochs, callbacks = [es, cp], verbose = 0)
