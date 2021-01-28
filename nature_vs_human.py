@@ -30,7 +30,7 @@ images_cv = [cv2.imread(i) for i in images_names if i.endswith(extension)]
 x_train = np.array(images_cv)
 
 #Importing the photo labels
-df = pd.read_excel("/content/CA_PNPG_Flickr.xlsx")
+df = pd.read_excel("/content/PG_PNPG_Flickr.xlsx")
 data = df.dropna(subset = ["Main_focus"])
 y = data["Main_focus"]
 y_train = np.array(y)
@@ -74,7 +74,7 @@ for i in x:
     x = np.append(x, batch[0], axis = 0)
     y = np.append(y, batch[1], axis = 0)
 model = Sequential()
-model.add(ResNet152(include_top = False, pooling = "max", input_shape = (173, 273, 3), weights = "imagenet")) #for VGG16, use VGG16()
+model.add(ResNet152(include_top = False, pooling = "max", input_shape = (173, 273, 3), weights = "imagenet")) #for VGG16, use VGG16(), for weights from scratch use weights = None
 model.add(Dense(128, activation = 'relu'))
 model.add(Dense(num_classes, activation = "softmax"))
 model.compile(optimizer = keras.optimizers.Adam(lr = 0.0001), loss = keras.losses.categorical_crossentropy, metrics = ['accuracy']) #for VGG16, use lr = 0.000001
