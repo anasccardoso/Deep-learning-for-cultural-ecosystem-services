@@ -39,14 +39,14 @@ x_test = np.array(test_cv)
 
 #Importing the train labels
 os.chdir("/content/")
-df = pd.read_excel("/content/CA_PNPG_Flickr.xlsx")
+df = pd.read_excel("/content/PG_PNPG_Flickr.xlsx")
 data = df.dropna(subset = ["Nature_Human"])
 y = data["Nature_Human"]
 y_train = np.array(y)
 
 #Importing the test labels
 os.chdir("/content/Serra Nevada/")
-test_df = pd.read_excel("/content/Serra Nevada/CA_PNPG_Flickr.xlsx")
+test_df = pd.read_excel("/content/Serra Nevada/SN_PNPG_Flickr.xlsx")
 test_data = test_df.dropna(subset = ["Nature_Human"])
 y_t = test_data["Nature_Human"]
 y_test = np.array(y_t)
@@ -62,7 +62,7 @@ print('x_test shape:', x_test.shape)
 
 #Parameters
 batch_size = 10
-num_classes = 2 #for the multilabel classification use num_classes = 6
+num_classes = 2
 epochs = 50
 
 #Converting class vectores to binary class matrices
