@@ -10,6 +10,7 @@ To implement the VGG16 architecture in the "nature_vs_human.py", "multilabel_cla
 To use the Places365 weights in the ResNet152 architecture, substitute "model.add(ResNet152(include_top = False, pooling = "max", input_shape = (173, 273, 3), weights = "imagenet"))" for "resnet_model = ResNet152(include_top = False, pooling = "max", input_shape = (173, 273, 3))"
                             "resnet_model.load_weights("/content/resnet152_places365.h5", by_name = True)"
                             "model.add(resnet_model)"  
+The ResNet152-Places365 weights (resnet152_places365.h5) are available at https://github.com/CSAILVision/places365.
                             
 To use the Places365 weights in the VGG16 architecture, add "from vgg16_places_365 import VGG16_Places365" and substitute "weights = "imagenet"" for "weights = places" (line 77).
 
